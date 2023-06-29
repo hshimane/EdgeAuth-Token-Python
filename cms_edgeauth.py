@@ -100,12 +100,12 @@ class EdgeAuth:
                     end_time = int(time.mktime(time.gmtime())) + \
                         self.window_seconds
                 else:
-                    end_time = start_time + self.window_seconds
+                    end_time = int(start_time) + self.window_seconds
             else:
                 raise EdgeAuthError('You must provide an expiration time or '
                     'a duration window ( > 0 )')
         
-        if start_time and (end_time <= start_time):
+        if int(start_time) and (int(end_time) <= int(start_time)):
             raise EdgeAuthError('Token will have already expired.')
 
         if self.verbose:
